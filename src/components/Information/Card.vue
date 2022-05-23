@@ -57,19 +57,19 @@ export default {
 @import '@/scss/_const';
 
 
-	.card {
-		display: inline-block;
-		border-radius: 5px;
-		color: $textColor;
-		font-weight: 700;
-		font-size: 16px;
-		margin: 0;
+.card {
+	display: inline-block;
+	border-radius: 5px;
+	color: $textColor;
+	font-weight: 700;
+	font-size: 16px;
+	margin: 0;
+}
+.children {
+	padding: 10px 20px;
+	background: #F1F1F1;
+	&:not(:last-child) {
+		margin-bottom: 20px;
 	}
-	.children {
-		padding: 10px 20px;
-		background: #F1F1F1;
-		&:not(:last-child) {
-			margin-bottom: 20px;
-		}
-	}
+}
 </style>
