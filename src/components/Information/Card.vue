@@ -1,7 +1,6 @@
 <template>
 	<p :class="['card', {
 		children: !isParent,
-		parent: isParent,
 	}]">
 		{{ name }}, {{ age }} {{ rightAgeEnd(age) }}
 		</p>
@@ -65,9 +64,6 @@ export default {
 		font-weight: 700;
 		font-size: 16px;
 		margin: 0;
-	}
-	.parent {
-
 	}
 	.children {
 		padding: 10px 20px;
