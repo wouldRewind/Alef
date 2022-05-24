@@ -1,9 +1,10 @@
 <template>
 	<div class="wrapper">
 		<button
-		class="button"
+		@click="onAdd"
+		:class="['button', {'button_disabled': disabled}]"
 		type="button">
-			<span class="button__icon"></span>
+			<span class="button__icon"/>
 			<span class="button__text">Добавить ребенка</span>
 		</button>
 	</div>
@@ -11,7 +12,17 @@
 
 <script>
 export default {
-	name: 'AddButton',	
+	name: 'AddButton',
+	props: {
+		onAdd: {
+			type: Function,
+			required: true,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
+		}
+	},
 }
 </script>
 
@@ -59,7 +70,7 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		&:hover {
+		&:hover:not(&_disabled) {
 			background: $blueColor;
 			&  .button__text {
 				color: white;
@@ -67,6 +78,18 @@ export default {
 			&  .button__icon {
 				&::after, &::before {
 					background: white;
+				}
+			}
+		}
+		&_disabled {
+			border: 2px solid $disableColor;
+			cursor: default;
+			& .button__text {
+				color: $disableColor;
+			}
+			& .button__icon {
+				&::after, &::before {
+					background: $disableColor;
 				}
 			}
 		}
