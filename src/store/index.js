@@ -1,14 +1,20 @@
 import { createStore } from 'vuex'
 
+
+import children from './modules/children'
+import parent from './modules/parent'
+
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+	modules: {
+		children: children(),
+		parent: parent(),
+	},
+	state: () => ({
+	}),
+	getters: {
+	},
+	mutations: {
+	},
+	actions: {
+	},
 })
