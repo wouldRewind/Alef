@@ -3,11 +3,12 @@ import { required } from "./common"
 
 
 // Кастомные валидаторы
-const correctFormat = value => /^[a-zA-Zа-яА-Я]+$/ui.test(value) || 'Некорректный формат имени!'
+const correctFormat = value => /^[a-zA-Zа-яА-Я]+$/ui.test(value) || 'Только буквы!'
+const minLength = value => value.length >= 2 || "Слишком короткое!"
 
 
-import { produceFormTemplate } from "../producer"
+import { produceInputTemplate } from "../producer"
 
 
 
-export default produceFormTemplate('Имя', [correctFormat, required])
+export default produceInputTemplate('Имя', [required, correctFormat, minLength])

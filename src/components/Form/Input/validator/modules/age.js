@@ -3,10 +3,12 @@ import { required } from "./common"
 
 
 // Кастомные валидаторы
-const isNumeric = value => Number.isInteger(value) || 'Возвраст - это число!'
-const rangeIsCorrect = value => value >= 0 && value <= 100 || 'Недопустимый диапазон!'
+const isNumeric = value => Number.isInteger(+value) || 'Введите число!'
 
 
-import { produceFormTemplate } from "../producer"
+import { produceInputTemplate } from "../producer"
 
-export default produceFormTemplate('Возраст', [isNumeric, rangeIsCorrect, required])
+
+const maxLength = 3 // максимальное число символов в инпуте
+
+export default produceInputTemplate('Возраст', [required, isNumeric], maxLength)

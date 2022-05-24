@@ -1,7 +1,14 @@
-export const produceFormTemplate = (label, validators) => ({
+const defaultMaxLength = 30
+
+
+export const produceInputTemplate = (label, validators, maxLength) => ({
 	validators,
 	label,
-	value: null,
+	value: '',
+	touched: false,
+	valid: false,
+	maxLength: maxLength || defaultMaxLength,
+	errors: [],
 	getErrors() {
 		return this.validators.reduce((errors, validator) => {
 			const potentialError = validator(this.value)
@@ -11,7 +18,10 @@ export const produceFormTemplate = (label, validators) => ({
 			return errors
 		}, [])
 	},
-	isValid() {
-		return this.validators.every(validator => typeof validator(this.value) !== 'string')
+	setValidInput() {
+		this.valid = this.validators.every(validator => typeof validator(this.value) !== 'string')
+	},
+	setTouchedInput(val) {
+		this.touched = val
 	}
 })

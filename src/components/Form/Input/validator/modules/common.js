@@ -1,1 +1,1 @@
-export const required = value => Boolean(value) || 'Поле является обязательным!'
+export const required = value => Boolean(value) || 'Поле обязательно!'
