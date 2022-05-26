@@ -1,12 +1,12 @@
 const defaultMaxLength = 30
 
 
-export const produceInputTemplate = (label, validators, maxLength) => ({
+export const produceInputTemplate = ({ label, validators, maxLength, type }) => ({
 	validators,
 	label,
+	type,
 	value: '',
 	touched: false,
-	valid: false,
 	maxLength: maxLength || defaultMaxLength,
 	errors: [],
 	getErrors() {
@@ -18,10 +18,7 @@ export const produceInputTemplate = (label, validators, maxLength) => ({
 			return errors
 		}, [])
 	},
-	setValidInput() {
-		this.valid = this.validators.every(validator => typeof validator(this.value) !== 'string')
-	},
-	setTouchedInput(val) {
+	setTouch(val) {
 		this.touched = val
 	}
 })

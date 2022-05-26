@@ -10,11 +10,4 @@ export class PersonForm {
 		this.valid = false
 		this.touched = false
 	}
-	setTouchedForm(val) {
-		this.touched = val
-	}
-	setValidForm() {
-		this.valid = this.fields
-			.every(field => field.valid && field.touched)
-	}
 }

@@ -9,6 +9,12 @@ const isNumeric = value => Number.isInteger(+value) || 'Введите числ�
 import { produceInputTemplate } from "../producer"
 
 
-const maxLength = 3 // максимальное число символов в инпуте
 
-export default produceInputTemplate('Возраст', [required, isNumeric], maxLength)
+const inputSetup = {
+	label: 'Возраст',
+	validators: [required, isNumeric],
+	maxLength: 3,
+	type: 'number',
+}
+
+export default produceInputTemplate(inputSetup)
