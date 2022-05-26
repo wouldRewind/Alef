@@ -12,13 +12,14 @@ export default () => ({
 		parent: new PersonForm(produceNewForm(name, age)),
 	}),
 	getters: {
+		parentIsValid: ({ parent }) => parent.fields.every(({ errors, touched }) => !errors.length && touched)
 	},
 	mutations: {
 		writeParentInputErrors: debounce(function(state, payload) {
 			if (state.parent !== null) {
 				state.parent.fields[payload].errors = state.parent.fields[payload].getErrors() 
 			}
-		}, 400),
+		}, 100),
 	},
 	actions: {
 	},

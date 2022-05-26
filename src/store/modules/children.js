@@ -10,19 +10,22 @@ import { debounce } from "debounce"
 export default () => ({
 	state: () => ({
 		children: [
-			new PersonForm(produceNewForm(name, age)),
-			new PersonForm(produceNewForm(name, age))
 		],
-		maxChildren: 5,
+		maxChildren: 2,
 	}),
 	getters: {
 		canAddChildren: ({ children, maxChildren }) => children.length < maxChildren,
+		childrenIsValid: ({ children }) => children
+		.every(({ fields }) => fields.every(({ errors, touched }) => !errors.length && touched)),
 	},
 	mutations: {
 		addEmptyChildrenForm(state) {
 			state.children.push(
 				new PersonForm(produceNewForm(name, age))
 			)
+		},
+		updatePreviewChildren(state, payload) {
+			state.previewChildren = payload
 		},
 		deleteChildrenFromStore(state, payload) {
 			state.children.splice(payload, 1)
@@ -32,7 +35,7 @@ export default () => ({
 				const [childrenIndex, fieldIndex] = payload
 				state.children[childrenIndex].fields[fieldIndex].errors = state.children[childrenIndex].fields[fieldIndex].getErrors() 
 			}
-		}, 400)
+		}, 100)
 	},
 	actions: {
 		addChildren({ commit, getters: { canAddChildren } }, payload) {
