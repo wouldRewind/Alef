@@ -1,7 +1,11 @@
 <template>
 	<label :class="['input-label', { error : hasError }]" for="input">
 		<span :class="['input-caption', { focused }]">{{ label }}</span>
-		<span v-if="hasError" class="input-error">{{ priorityError }}</span>
+		<!-- <transition name="error-appear"> -->
+			<span v-if="hasError" class="input-error">
+				{{ priorityError }}
+			</span>
+		<!-- </transition> -->
 		<br>
 		<input
 		autocomplete="off"
@@ -10,9 +14,9 @@
 		@input="handleInput"
 		:maxlength="maxLength"
 		id="input"
+		:type="type"
 		class="input"
-		:value="modelValue"
-		type="text">
+		:value="modelValue">
 	</label>
 </template>
 
@@ -40,13 +44,18 @@ export default {
 			type: Number,
 			required: true,
 		},
+		type: {
+			type: String,
+			required: true,
+		},
 	},
 	data: () => ({
 		focused: false,
 	}),
 	methods: {
-		handleInput: function(event) {
-			this.$emit('update:modelValue', event.target.value)
+		handleInput(event) {
+			this.$emit('update:modelValue', event.target.value);
+			this.$emit('setTouched')
 		},
 		handleFocus() {
 			this.focused = true
@@ -75,6 +84,10 @@ export default {
 .input {
 	border: none;
 	outline: none;
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 }
 .input-label {
 	position: relative;
@@ -113,6 +126,15 @@ export default {
 	font-size: 14px;
 	font-family: "Montserrat", serif;
 	font-weight: 400;
+}
+.error-appear-enter, .error-appear-leave-to {
+	opacity: 0;
+}
+.error-appear-enter-to {
+	opacity: 1;
+}
+.error-appear-enter-active, .error-appear-leave-active {
+	transition: $transition;
 }
 
 </style>
