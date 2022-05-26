@@ -4,15 +4,17 @@
 		<h3 class="form__title">
 			Персональные данные
 		</h3>
-		<ul v-if="parent" class="form-parent">
+		<ul class="form-parent">
 			<li 
-			v-for="(item, fieldIndex) in parent.parent.fields"
+			v-for="(item, fieldIndex) in parent.fields"
 			:key="fieldIndex"
 			class="form-parent__field">
 				<Input
 				@input="writeParentInputErrors(fieldIndex)"
+				@setTouched="item.setTouch(true)"
 				v-model="item.value"
 				:errors="item.errors"
+				:type="item.type"
 				:maxLength="item.maxLength"
 				:label="item.label"/>
 			</li>
@@ -20,7 +22,7 @@
 		<div class="form-children">
 			<header class="form-children__header">
 				<h3 class="form-children__title">
-					Дети (макс. {{ children.maxChildren }})
+					Дети (макс. {{ maxChildren }})
 				</h3>
 				<AddButton
 				:disabled="!canAddChildren"
@@ -28,15 +30,17 @@
 			</header>
 			<ul class="form-children__list">
 				<li 
-				v-for="(item, childrenIndex) in children.children"
+				v-for="(item, childrenIndex) in children"
 				:key="childrenIndex"
 				class="form-children__item">
 					<Input
 					class="form-children__input"
 					v-for="(input, fieldIndex) in item.fields"
 					@input="writeChildrenInputErrors([childrenIndex, fieldIndex])"
+					@setTouched="input.setTouch(true)"
 					:key="fieldIndex"
 					v-model="input.value"
+					:type="input.type"
 					:errors="input.errors"
 					:maxLength="input.maxLength"
 					:label="input.label"
@@ -49,6 +53,8 @@
 		</div>
 		<div class="form-save">
 			<SaveButton
+			@onSave="updatePreview"
+			:disabled="!canSave"
 			/>
 		</div>
 	</div>
@@ -67,25 +73,29 @@ import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
 	components: { Input, AddButton, DeleteButton, SaveButton },
+	created() {
+		this.updatePreview();
+	},
 	computed: {
-		...mapState(['children', 'parent', 'maxChildren']),
-		...mapGetters(['canAddChildren']),
+		...mapState({
+			children: ({ children }) => children.children,
+			parent: ({ parent }) => parent.parent,
+			maxChildren: ({ children }) => children.maxChildren,
+		}),
+		...mapGetters(['canAddChildren','canSave']),
 	},
 	methods: {
-		handleSaveClick() {
-			console.warn('Save!')
-		},
 		...mapMutations([
 			'writeParentInputErrors',
-			'writeChildrenInputErrors'
+			'writeChildrenInputErrors',
+			'writeToPreview'
 		]),
 		...mapActions([
 			'addChildren',
-			'deleteChildren'
+			'deleteChildren',
+			'updatePreview'
 		])
 	},
-	data: () => ({
-	}),
 }
 </script>
 

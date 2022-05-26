@@ -1,28 +1,25 @@
 <template>
 	<div class="preview">
 		<div class="preview__wrapper">
-			<div class="preview__personal">
+			<div v-if="parentHasWritten" class="preview__personal">
 				<h3 class="preview__title">
 					Персональные данные
 				</h3>
 				<Card 
 				:isParent="true" 
-				:name="'Василий'" 
-				:age="31"/>
+				:name="previewParentName" 
+				:age="previewParentAge"/>
 			</div>
-			<div class="preview__children">
+			<div v-if="childrenHasWritten" class="preview__children">
 				<h3 class="preview__title">
 					Дети
 				</h3>
-				<Card 
-				:name="'Петр'" 
-				:age="10"/>
-				<Card 
-				:name="'Никита'" 
-				:age="20"/>
-				<Card 
-				:name="'Виктория'" 
-				:age="9"/>
+				<Card
+				v-for="child in children"
+				:key="child.name"
+				:name="child.name"
+				:age="child.age"
+				/>
 			</div>
 		</div>
 	</div>
@@ -30,11 +27,22 @@
 
 <script>
 import Card from '@/components/Information/Card.vue';
+import { mapGetters, mapState } from 'vuex';
 
 
 export default {
-  name: "PreviewView",
-  components: { Card, },
+	name: "PreviewView",
+	components: { Card, },
+	created() {
+		console.log(this.children);
+	},
+	computed: {
+		...mapState({
+			children: ({ previewChildren }) => previewChildren,
+		}),
+		...mapGetters(['previewParentName', 'previewParentAge',
+		'parentHasWritten', 'childrenHasWritten']),
+	},
 };
 </script>
 
