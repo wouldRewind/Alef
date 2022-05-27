@@ -1,11 +1,13 @@
 <template>
 	<label :class="['input-label', { error : hasError }]" for="input">
-		<span :class="['input-caption', { focused }]">{{ label }}</span>
-		<!-- <transition name="error-appear"> -->
-			<span v-if="hasError" class="input-error">
-				{{ priorityError }}
-			</span>
-		<!-- </transition> -->
+		<Caption
+		:label="label"
+		:focused="focused"/>
+		<Error
+		class="input-error"
+		:hasError="hasError"
+		:error="priorityError"
+		/>
 		<br>
 		<input
 		autocomplete="off"
@@ -21,12 +23,13 @@
 </template>
 
 <script>
+import Error from './Error.vue';
+import Caption from './Caption.vue'
+
+
 export default {
-	model: {
-		prop: 'value',
-		event: 'onValueChange'
-	},
 	name: 'Input',
+	components: { Error, Caption },
 	props: {
 		label: {
 			required: true,
@@ -69,10 +72,10 @@ export default {
 	},
 	computed: {
 		hasError() {
-			return this.errors.length
+			return Boolean(this.errors.length)
 		},
 		priorityError() {
-			return this.errors[0]
+			return String(this.errors[0])
 		}
 	},
 }
@@ -111,8 +114,6 @@ export default {
 	}
 }
 .input-error {
-	color: $errorColor;
-	font-size: 11px;
 	position: absolute;
 	top: -8px;
 	left: 8px;
