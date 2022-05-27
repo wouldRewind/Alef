@@ -41,10 +41,22 @@ export default createStore({
 		},
 	},
 	actions: {
-		updatePreview({ commit, getters: { canSave } }) {
+		updatePreview({ commit, getters: { canSave }, state : { children, parent } }) {
 			if (canSave) {
 				commit('writePreviewChildren')
 				commit('writePreviewParent')
+			} else {
+				const parentFields = parent.parent.fields
+				parentFields.forEach(field => {
+					field.errors = field.getErrors()
+				})
+
+				const childrenArray = children.children
+				childrenArray.forEach(item => {
+					item.fields.forEach(field => {
+						field.errors = field.getErrors()
+					})
+				})
 			}
 		},
 	},

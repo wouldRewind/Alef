@@ -71,7 +71,7 @@
 import SaveButton from '@/components/Form/Button/Save.vue'
 import AddButton from '@/components/Form/Button/Add.vue'
 import DeleteButton from '@/components/Form/Button/Delete.vue'
-import Input from '@/components/Form/Input/Component.vue'
+import Input from '@/components/Form/Input/Index.vue'
 
 
 import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
@@ -79,9 +79,6 @@ import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
 	components: { Input, AddButton, DeleteButton, SaveButton, },
-	created() {
-		this.updatePreview();
-	},
 	computed: {
 		...mapState({
 			children: ({ children }) => children.children,

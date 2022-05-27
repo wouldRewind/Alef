@@ -21,6 +21,13 @@
 				:age="child.age"
 				/>
 			</div>
+			<div
+			v-if="noPersonInformation"
+			class="preview-empty">
+				<router-link class="preview-empty__link" to="/form">
+					Заполните персональную информацию!
+				</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -33,15 +40,15 @@ import { mapGetters, mapState } from 'vuex';
 export default {
 	name: "PreviewView",
 	components: { Card, },
-	created() {
-		console.log(this.children);
-	},
 	computed: {
 		...mapState({
 			children: ({ previewChildren }) => previewChildren,
 		}),
 		...mapGetters(['previewParentName', 'previewParentAge',
 		'parentHasWritten', 'childrenHasWritten']),
+		noPersonInformation() {
+			return !this.parentHasWritten && !this.childrenHasWritten
+		}
 	},
 };
 </script>
@@ -66,7 +73,17 @@ export default {
 .preview__personal {
 	margin-bottom: 60px;
 }
-
+.preview-empty {
+	text-align: center;
+}
+.preview-empty__link {
+	text-decoration: none;
+	color: $textColor;
+	transition: $transition;
+	&:hover {
+		color: $blueColor;
+	}
+}
 @media screen and (max-width: 720px) {
 	.preview__wrapper {
 	max-width: 300px;
