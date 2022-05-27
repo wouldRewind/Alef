@@ -1,0 +1,51 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": true,
+		"jsx": "preserve",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"useDefineForClassFields": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"types": [
+			"webpack-env"
+		],
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		},
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable",
+			"scripthost"
+		]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"tests/**/*.ts",
+		"tests/**/*.tsx",
+		"src/components/Form/Input/validator/modules/age.js",
+		"src/components/Form/Input/validator/modules/common.js",
+		"src/components/Form/Input/validator/modules/name.js",
+		"src/components/Form/Input/validator/index.js",
+		"src/components/Form/Input/validator/producer.js",
+		"src/main.js",
+		"src/router/index.js",
+		"src/store/index.js",
+		"src/store/modules/children.js",
+		"src/store/modules/parent.js"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
