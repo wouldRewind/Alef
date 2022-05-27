@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__wrapper">
       <nav class="header-nav">
-        <router-link active-class="header-nav__link_active" class="header-nav__link" to="/form">Форма</router-link>
+        <router-link active-class="header-nav__link_active" class="header-nav__link" to="/">Форма</router-link>
         <router-link active-class="header-nav__link_active" class="header-nav__link" to="/preview">
           Превью
         </router-link>

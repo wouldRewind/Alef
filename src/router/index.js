@@ -2,10 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
 	{
-		path: '/form',
+		path: '/',
 		name: 'form',
 		component: () => import('@/views/FormView.vue')
 	},
+	
 	{
 		path: '/preview',
 		name: 'preview',

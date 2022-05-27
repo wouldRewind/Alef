@@ -39,7 +39,7 @@
 		"src/components/Form/Input/validator/modules/name.js",
 		"src/components/Form/Input/validator/index.js",
 		"src/components/Form/Input/validator/producer.js",
-		"src/main.js",
+		"src/main.ts",
 		"src/router/index.js",
 		"src/store/index.js",
 		"src/store/modules/children.js",
