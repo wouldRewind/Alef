@@ -1,7 +1,9 @@
 <template>
-	<span class="error" v-if="hasError">
+	<transition name="scale">
+		<span class="error" v-if="hasError">
 		{{ error }}
-	</span>
+		</span>
+	</transition>
 </template>
 
 
@@ -28,5 +30,11 @@ export default {
 .error {
 	color: $errorColor;
 	font-size: 11px;
+}
+.scale-enter-active, .scale-leave-active {
+	transition:  $transition;
+}
+.scale-leave-to {
+	opacity: 0;
 }
 </style>
