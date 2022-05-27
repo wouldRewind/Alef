@@ -10,16 +10,14 @@ export default createStore({
 		parent: parent(),
 	},
 	state: () => ({
-		previewChildren: [
-			
-		],
+		previewChildren: [],
 		previewParent: {},
 	}),
 	getters: {
 		canSave: (state, { parentIsValid, childrenIsValid }) => parentIsValid && childrenIsValid,
 
 
-		parentHasWritten: ({ previewParent}) => !!Object.keys(previewParent).length,
+		parentHasWritten: ({ previewParent }) => !!Object.keys(previewParent).length,
 		childrenHasWritten: ({ previewChildren }) => !!Object.keys(previewChildren).length,
 
 
@@ -29,8 +27,8 @@ export default createStore({
 	mutations: {
 		writePreviewChildren(state) {
 			const children = state.children.children
-			state.previewChildren =  children.reduce((acc, { fields }) => {
-				const [name, age] = fields.reduce((acc, { value }) => [...acc, value] , [])
+			state.previewChildren = children.reduce((acc, { fields }) => {
+				const [name, age] = fields.reduce((acc, { value }) => [...acc, value], [])
 				return [...acc, { name, age }]
 			}, [])
 		},

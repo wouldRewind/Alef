@@ -11,7 +11,7 @@ export default () => ({
 	state: () => ({
 		children: [
 		],
-		maxChildren: 2,
+		maxChildren: 5,
 	}),
 	getters: {
 		canAddChildren: ({ children, maxChildren }) => children.length < maxChildren,
