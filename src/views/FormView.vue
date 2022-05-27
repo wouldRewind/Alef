@@ -1,24 +1,26 @@
 <template>
   <div class="form">
     <div class="form__wrapper">
-		<h3 class="form__title">
-			Персональные данные
-		</h3>
-		<ul class="form-parent">
-			<li 
-			v-for="(item, fieldIndex) in parent.fields"
-			:key="fieldIndex"
-			class="form-parent__field">
-				<Input
-				@input="writeParentInputErrors(fieldIndex)"
-				@setTouched="item.setTouch(true)"
-				v-model="item.value"
-				:errors="item.errors"
-				:type="item.type"
-				:maxLength="item.maxLength"
-				:label="item.label"/>
-			</li>
-		</ul>
+		<div class="parent-wrap">
+			<h3 class="form__title">
+				Персональные данные
+			</h3>
+			<ul class="form-parent">
+				<li 
+				v-for="(item, fieldIndex) in parent.fields"
+				:key="fieldIndex"
+				class="form-parent__field">
+					<Input
+					@input="writeParentInputErrors(fieldIndex)"
+					@setTouched="item.setTouch(true)"
+					v-model="item.value"
+					:errors="item.errors"
+					:type="item.type"
+					:maxLength="item.maxLength"
+					:label="item.label"/>
+				</li>
+			</ul>
+		</div>
 		<div class="form-children">
 			<header class="form-children__header">
 				<h3 class="form-children__title">
@@ -28,7 +30,10 @@
 				:disabled="!canAddChildren"
 				:onAdd="addChildren"/>
 			</header>
-			<ul class="form-children__list">
+			<TransitionGroup
+			name="list"
+			tag="ul"
+			class="form-children__list">
 				<li 
 				v-for="(item, childrenIndex) in children"
 				:key="childrenIndex"
@@ -46,10 +51,10 @@
 					:label="input.label"
 					/>
 					<DeleteButton
-					:onDelete="deleteChildren"
+					:onDelete="handleDeleteClick(childrenIndex)"
 					/>
 				</li>
-			</ul>
+			</TransitionGroup>
 		</div>
 		<div class="form-save">
 			<SaveButton
@@ -62,6 +67,7 @@
 </template>
 
 <script>
+// import { TransitionGroup } from '@vue/runtime-dom'
 import SaveButton from '@/components/Form/Button/Save.vue'
 import AddButton from '@/components/Form/Button/Add.vue'
 import DeleteButton from '@/components/Form/Button/Delete.vue'
@@ -72,7 +78,7 @@ import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 
 
 export default {
-	components: { Input, AddButton, DeleteButton, SaveButton },
+	components: { Input, AddButton, DeleteButton, SaveButton, },
 	created() {
 		this.updatePreview();
 	},
@@ -94,7 +100,10 @@ export default {
 			'addChildren',
 			'deleteChildren',
 			'updatePreview'
-		])
+		]),
+		handleDeleteClick(index) {
+			return () => this.deleteChildren(index)
+		},
 	},
 }
 </script>
@@ -156,5 +165,24 @@ export default {
 }
 .form-children__input {
 	margin-right: 18px;
+}
+.list-move {
+	transition: $transition;
+}
+.list-enter-active {
+	transition: $transition;
+}
+.list-leave-active {
+	transition: none;
+}
+.list-leave-to {
+	opacity: 0;
+}
+.list-enter-from {
+	opacity: 0;
+	transform: translateY(-30px);
+}
+.list-leave-active {
+	position: absolute;
 }
 </style>

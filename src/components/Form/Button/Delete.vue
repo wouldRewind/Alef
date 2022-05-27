@@ -15,9 +15,9 @@ export default {
 	props: {
 		onDelete: {
 			type: Function,
-			required: false,
+			required: true,
 		},
-	},
+	}
 }
 </script>
 
