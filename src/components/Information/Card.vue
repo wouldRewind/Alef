@@ -7,9 +7,10 @@
 		<br/>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import trueAge from './trueAge'
-export default {
+export default defineComponent({
 	name: 'Card',
 	props: {
 		name: {
@@ -18,7 +19,7 @@ export default {
 		},
 		age: {
 			required: true,
-			type: [Number, String],
+			type: Number,
 		},
 		isParent: {
 			type: Boolean,
@@ -28,7 +29,7 @@ export default {
 	methods: {
 		trueAge,
 	},
-}
+})
 </script>
 
 <style lang="scss" scoped>

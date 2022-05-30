@@ -1,6 +1,6 @@
-export default function rightAgeEnd(age) {
-	let end;
-	let count = age % 100;
+export default function rightAgeEnd(age: number) : string {
+	let end : string;
+	let count : number = age % 100;
 	if (count >= 5 && count <= 20) {
 		end = 'лет';
 	}
