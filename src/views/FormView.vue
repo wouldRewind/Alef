@@ -31,9 +31,11 @@
 				:onAdd="addChildren"/>
 			</header>
 			<TransitionGroup
-			name="list"
 			tag="ul"
-			class="form-children__list">
+			enterActiveClass="animate__animated animate__lightSpeedInLeft"
+			leaveActiveClass="animate__animated animate__lightSpeedOutLeft"
+			class="form-children__list"
+			>
 				<li 
 				v-for="(item, childrenIndex) in children"
 				:key="childrenIndex"
@@ -41,10 +43,10 @@
 					<Input
 					class="form-children__input"
 					v-for="(input, fieldIndex) in item.fields"
+					v-model="input.value"
 					@input="writeChildrenInputErrors([childrenIndex, fieldIndex])"
 					@setTouched="input.setTouch(true)"
 					:key="fieldIndex"
-					v-model="input.value"
 					:type="input.type"
 					:errors="input.errors"
 					:maxLength="input.maxLength"

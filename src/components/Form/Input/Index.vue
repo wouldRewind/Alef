@@ -31,6 +31,15 @@ export default {
 	name: 'Input',
 	components: { Error, Caption },
 	props: {
+		input: {
+			type: {
+				errors: Array,
+				maxLength: [Number, String],
+				label: String,
+				type: String,
+			},
+			required: false,
+		},
 		label: {
 			required: true,
 			type: String,

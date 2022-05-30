@@ -1,5 +1,7 @@
 <template>
-	<transition name="scale">
+	<transition
+	enter-active-class="animate__animated animate__jello"
+	leave-active-class="animate__animated animate__zoomOut animate__faster">
 		<span class="error" v-if="hasError">
 		{{ error }}
 		</span>

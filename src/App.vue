@@ -1,9 +1,12 @@
 <template>
 	<Header />
-		<transition name="slide-fade">
-			
+		<transition
+		mode="in-out"
+		duration="50000"
+		enter-active-class="animate__animated animate__fadeIn"
+		leave-active-class="animate__animated animate__fadeOut">
+			<router-view/>
 		</transition>
-		<router-view/>
 	<Footer/>
 </template>
 
