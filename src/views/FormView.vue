@@ -8,7 +8,7 @@
 			<ul class="form-parent">
 				<li 
 				v-for="(item, fieldIndex) in parent.fields"
-				:key="fieldIndex"
+				:key="item.id"
 				class="form-parent__field">
 					<Input
 					@input="writeParentInputErrors(fieldIndex)"
@@ -46,7 +46,7 @@
 					v-model="input.value"
 					@input="writeChildrenInputErrors([childrenIndex, fieldIndex])"
 					@setTouched="input.setTouch(true)"
-					:key="fieldIndex"
+					:key="input.id"
 					:type="input.type"
 					:errors="input.errors"
 					:maxLength="input.maxLength"
@@ -69,7 +69,6 @@
 </template>
 
 <script>
-// import { TransitionGroup } from '@vue/runtime-dom'
 import SaveButton from '@/components/Form/Button/Save.vue'
 import AddButton from '@/components/Form/Button/Add.vue'
 import DeleteButton from '@/components/Form/Button/Delete.vue'

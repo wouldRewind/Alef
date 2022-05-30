@@ -24,7 +24,7 @@
 			<div
 			v-if="noPersonInformation"
 			class="preview-empty">
-				<router-link class="preview-empty__link" to="/form">
+				<router-link class="preview-empty__link" to="/">
 					Заполните персональную информацию!
 				</router-link>
 			</div>
