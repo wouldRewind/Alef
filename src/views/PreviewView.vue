@@ -6,7 +6,7 @@
 					Персональные данные
 				</h3>
 				<Card 
-				:isParent="true" 
+				isParent 
 				:name="previewParentName" 
 				:age="previewParentAge"/>
 			</div>

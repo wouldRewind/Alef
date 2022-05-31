@@ -75,9 +75,6 @@ export default {
 		handleBlur() {
 			this.focused = false
 		},
-		handleTouch(event) {
-			this.$emit('onTouch', event)
-		}
 	},
 	computed: {
 		hasError() {
@@ -129,6 +126,11 @@ export default {
 	padding: 0 8px 0 8px;
 	background: white;
 	z-index: 10;
+}
+@media screen and (max-width: 720px) {
+	.input-error {
+		padding: 0 1px 0 1px;
+	}	
 }
 .input {
 	width: 100%;

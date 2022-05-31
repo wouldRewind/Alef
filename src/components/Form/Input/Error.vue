@@ -33,10 +33,4 @@ export default {
 	color: $errorColor;
 	font-size: 11px;
 }
-.scale-enter-active, .scale-leave-active {
-	transition:  $transition;
-}
-.scale-leave-to {
-	opacity: 0;
-}
 </style>

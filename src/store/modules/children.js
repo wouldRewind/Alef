@@ -41,8 +41,6 @@ export default () => ({
 		addChildren({ commit, getters: { canAddChildren } }, payload) {
 			if (canAddChildren) {
 				commit('addEmptyChildrenForm', payload)
-			} else {
-				console.log(canAddChildren)
 			}
 		},
 		deleteChildren({ commit }, payload) {

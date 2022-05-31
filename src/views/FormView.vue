@@ -77,7 +77,6 @@ import Input from '@/components/Form/Input/Index.vue'
 
 import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 
-
 export default {
 	components: { Input, AddButton, DeleteButton, SaveButton, },
 	computed: {
@@ -164,23 +163,12 @@ export default {
 .form-children__input {
 	margin-right: 18px;
 }
-.list-move {
-	transition: $transition;
-}
-.list-enter-active {
-	transition: $transition;
-}
-.list-leave-active {
-	transition: none;
-}
-.list-leave-to {
-	opacity: 0;
-}
-.list-enter-from {
-	opacity: 0;
-	transform: translateY(-30px);
-}
-.list-leave-active {
-	position: absolute;
+
+
+@media screen and (max-width: 720px) {
+	.form__wrapper {
+	max-width: 350px;
+	font-size: .9rem;
+}	
 }
 </style>

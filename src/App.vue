@@ -2,7 +2,6 @@
 	<Header />
 		<transition
 		mode="in-out"
-		duration="50000"
 		enter-active-class="animate__animated animate__fadeIn"
 		leave-active-class="animate__animated animate__fadeOut">
 			<router-view />
@@ -16,17 +15,14 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
-  components: {
-    Header,
-	Footer
-  },
+	components: { Header, Footer },
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
 body {
-  font-family: "Montserrat", sans-serif;
+	font-family: "Montserrat", sans-serif;
 }
 * {
 	box-sizing: border-box;
